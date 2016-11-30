@@ -27,4 +27,15 @@ Using Node-RED to create and deploy some sample flows, we can now destroy the co
         $ docker rm nodered
         $ docker run -it -p 1880:1880 -v node_red_user_data:/data --name nodered kratochj/node-red
 
+### Setting authentication
+
+You can pass list of users via environment variables `USERS_FULL_ACCESS` and `USERS_RO_ACCESS` as a list of username|passwor_hash pairs separated by comma. 
+
+To generate hash simply run:
+		$ docker run -it kratochj/node-red hash
+		
+This hash can be used as an environment variables as in example: 
+
+		$ docker run -it -p 1880:1880 -e USERS_FULL_ACCESS="admin|hash1,admin2|hash2" -e USER_RO_ACCESS="readonlyuser|hash" --name nodered kratochj/node-red
+
 

@@ -13,6 +13,10 @@ RUN adduser -D -h /usr/src/node-red -H node-red \
     && chown -R node-red:node-red /data \
     && chown -R node-red:node-red /usr/src/node-red
 
+RUN npm install -g node-red-admin
+COPY hash /bin/hash
+RUN chmod 755 /bin/hash
+
 USER node-red
 
 # package.json contains Node-RED NPM module and node dependencies
@@ -26,4 +30,7 @@ VOLUME /data
 # Environment variable holding file path for flows configuration
 ENV FLOWS=flows.json
 
-CMD ["npm", "start", "--", "--userDir", "/data"]
+COPY entrypoint.sh entrypoint.sh
+COPY settings.sample.js settings.sample.js
+
+CMD ["./entrypoint.sh"]
