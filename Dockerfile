@@ -1,5 +1,10 @@
 FROM node:7-alpine
 
+RUN buildDeps='git alpine-sdk openssl-dev libwebsockets-dev c-ares-dev util-linux-dev hiredis-dev curl-dev libxslt docbook-xsl'; \
+  apk update && \
+  apk add $buildDeps python && \
+  apk del $buildDeps && rm -rf /var/cache/apk/*
+
 # Home directory for Node-RED application source code.
 RUN mkdir -p /usr/src/node-red
 
@@ -21,7 +26,7 @@ USER node-red
 
 # package.json contains Node-RED NPM module and node dependencies
 COPY package.json /usr/src/node-red/
-RUN npm install
+RUN npm install && npm install node-red-dashboard
 
 # User configuration directory volume
 EXPOSE 1880
@@ -32,5 +37,6 @@ ENV FLOWS=flows.json
 
 COPY entrypoint.sh entrypoint.sh
 COPY settings.sample.js settings.sample.js
+
 
 CMD ["./entrypoint.sh"]

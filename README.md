@@ -1,6 +1,6 @@
 # Node-RED-Docker
 
-This project describes some of the many ways Node-RED can be run under Docker.
+This project describes some of the many ways Node-RED can be run under Docker. Node-RED offers nice responsible UI to control workflows from all smart devices which is bundled within this image.
 
 To run this directly in docker at it's simplest just run
 
@@ -39,5 +39,4 @@ To generate hash simply run:
 This hash can be used as an environment variables as in example: 
 
 		$ docker run -it -p 1880:1880 -e USERS_FULL_ACCESS="admin|hash1,admin2|hash2" -e USER_RO_ACCESS="readonlyuser|hash" --name nodered kratochj/node-red
-
 
