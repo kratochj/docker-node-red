@@ -32,7 +32,9 @@ Using Node-RED to create and deploy some sample flows, we can now destroy the co
 You can pass list of users via environment variables `USERS_FULL_ACCESS` and `USERS_RO_ACCESS` as a list of username|passwor_hash pairs separated by comma. 
 
 To generate hash simply run:
+
 		$ docker run -it kratochj/node-red hash
+		(in dialog add password and hash will be printed on STDOUT)
 		
 This hash can be used as an environment variables as in example: 
 
